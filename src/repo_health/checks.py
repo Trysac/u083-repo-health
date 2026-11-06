@@ -153,6 +153,10 @@ class SubprocessGit:
         text = out.decode("utf-8", errors="replace").strip()
         if not text:
             return None
+        if text.endswith(
+            "Z"
+        ):  # newer git prints UTC as "Z", which fromisoformat accepts only from Python 3.11
+            text = text[:-1] + "+00:00"
         try:
             parsed = datetime.fromisoformat(text)
         except ValueError:

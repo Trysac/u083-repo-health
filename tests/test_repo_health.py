@@ -752,3 +752,11 @@ def test_package_metadata() -> None:
     assert any(isinstance(h, logging.NullHandler) for h in handlers)
     for name in repo_health.__all__:
         assert hasattr(repo_health, name)
+
+
+def test_last_commit_time_accepts_utc_z_suffix(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    port = SubprocessGit(tmp_path)
+    monkeypatch.setattr(port, "_run", lambda *args: b"2026-11-06T04:15:04Z\n")
+    assert port.last_commit_time() == datetime(2026, 11, 6, 4, 15, 4, tzinfo=timezone.utc)
