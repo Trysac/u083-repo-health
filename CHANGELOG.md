@@ -9,4 +9,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Added `repo_health`: ten weighted offline repository health checks (docs, tests, CI, security, maintenance) with `run_checks`, `score`, `SubprocessGit` and a `python -m repo_health` CLI with `--format`, `--min-score` and `--now`.
 - Initial project structure from the factory utility template.

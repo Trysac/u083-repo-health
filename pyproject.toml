@@ -19,6 +19,9 @@ classifiers = [
 ]
 dependencies = []
 
+[project.scripts]
+repo-health = "repo_health.__main__:main"
+
 [project.urls]
 Homepage = "https://github.com/Trysac/u083-repo-health"
 Source = "https://github.com/Trysac/u083-repo-health"
