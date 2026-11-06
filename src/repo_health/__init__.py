@@ -1,21 +1,29 @@
-"""Score a local repository checkout on docs, tests, CI, security and maintenance with ten weighted offline checks and a grade"""
+"""Score a local repository checkout with ten weighted, offline health checks."""
 
 from __future__ import annotations
 
-__all__ = ["__version__", "normalize"]
+import logging
+
+from repo_health.checks import (
+    CheckResult,
+    GitPort,
+    RepoHealthError,
+    SubprocessGit,
+    run_checks,
+)
+from repo_health.report import HealthReport, score
+
+__all__ = [
+    "CheckResult",
+    "GitPort",
+    "HealthReport",
+    "RepoHealthError",
+    "SubprocessGit",
+    "__version__",
+    "run_checks",
+    "score",
+]
 
 __version__ = "0.1.0"
 
-
-def normalize(value: str) -> str:
-    """Return ``value`` trimmed and lower-cased.
-
-    Placeholder API created by the template: replace it with the utility's real behavior.
-
-    Raises:
-        ValueError: if ``value`` is empty or only whitespace.
-    """
-    cleaned = value.strip()
-    if not cleaned:
-        raise ValueError("value must not be empty")
-    return cleaned.lower()
+logging.getLogger(__name__).addHandler(logging.NullHandler())
